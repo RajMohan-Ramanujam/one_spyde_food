@@ -21,26 +21,38 @@ const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 z-30 px-4 md:px-8 flex items-center justify-between shadow-sm">
       
-      {/* Brand logo (Basketball Style & Orange/Black Color Pattern) */}
+      {/* Brand logo (Basketball Pizza - Game + Food Theme) */}
       <div className="flex items-center space-x-2">
         <Link to="/" onClick={() => setSearchQuery('')} className="flex items-center space-x-2.5">
           <svg viewBox="0 0 100 100" className="w-8.5 h-8.5 shrink-0 select-none">
-            {/* Basketball Orange Sphere */}
-            <circle cx="50" cy="50" r="46" fill="#F97316" stroke="#000000" strokeWidth="5" />
-            {/* Seam lines */}
-            <path d="M 50 4 A 46 46 0 0 0 50 96" fill="none" stroke="#000000" strokeWidth="4" />
-            <path d="M 4 50 A 46 46 0 0 0 96 50" fill="none" stroke="#000000" strokeWidth="4" />
-            <path d="M 17 17 C 35 30 35 70 17 83" fill="none" stroke="#000000" strokeWidth="4" />
-            <path d="M 83 17 C 65 30 65 70 83 83" fill="none" stroke="#000000" strokeWidth="4" />
+            {/* Pizza Crust */}
+            <circle cx="50" cy="50" r="46" fill="#D97706" stroke="#000000" strokeWidth="4.5" />
+            {/* Cheese Layer */}
+            <circle cx="50" cy="50" r="40" fill="#FBBF24" />
+            
+            {/* Basketball Seams / Pizza Slice Cuts */}
+            <path d="M 50 10 A 40 40 0 0 0 50 90" fill="none" stroke="#78350F" strokeWidth="3" strokeLinecap="round" />
+            <path d="M 10 50 A 40 40 0 0 0 90 50" fill="none" stroke="#78350F" strokeWidth="3" strokeLinecap="round" />
+            <path d="M 21.5 21.5 C 37 32 37 68 21.5 78.5" fill="none" stroke="#78350F" strokeWidth="3" strokeLinecap="round" />
+            <path d="M 78.5 21.5 C 63 32 63 68 78.5 78.5" fill="none" stroke="#78350F" strokeWidth="3" strokeLinecap="round" />
+            
+            {/* Red Pepperoni Toppings */}
+            <circle cx="32" cy="35" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
+            <circle cx="68" cy="35" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
+            <circle cx="32" cy="65" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
+            <circle cx="68" cy="65" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
+            <circle cx="50" cy="22" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
+            <circle cx="50" cy="78" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
+
             {/* Stylized 'S' */}
             <text 
               x="50" 
               y="59" 
               textAnchor="middle" 
               fill="#FFFFFF" 
-              stroke="#000000" 
-              strokeWidth="2.5" 
-              fontSize="28" 
+              stroke="#78350F" 
+              strokeWidth="2" 
+              fontSize="26" 
               fontWeight="900" 
               paintOrder="stroke fill"
             >
@@ -65,7 +77,7 @@ const Navbar = () => {
         {searchQuery && (
           <button 
             onClick={() => setSearchQuery('')}
-            className="absolute inset-y-0 right-2.5 flex items-center text-gray-400 hover:text-gray-650 text-xs"
+            className="absolute inset-y-0 right-2.5 flex items-center text-gray-400 hover:text-gray-655 text-xs"
           >
             ✕
           </button>
@@ -132,7 +144,7 @@ const Navbar = () => {
 
         <button 
           onClick={logout}
-          className="text-xs text-red-500 hover:text-red-650 font-semibold transition-colors"
+          className="text-xs text-red-500 hover:text-red-655 font-semibold transition-colors"
         >
           Logout
         </button>

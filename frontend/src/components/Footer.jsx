@@ -9,21 +9,28 @@ const Footer = () => {
         {/* Company Info */}
         <div className="space-y-3">
           <div className="flex items-center space-x-2">
-            {/* Basketball Style Logo */}
+            {/* Basketball Pizza Logo - Game + Food Theme */}
             <svg viewBox="0 0 100 100" className="w-8 h-8 shrink-0 select-none">
-              <circle cx="50" cy="50" r="46" fill="#F97316" stroke="#000000" strokeWidth="5" />
-              <path d="M 50 4 A 46 46 0 0 0 50 96" fill="none" stroke="#000000" strokeWidth="4" />
-              <path d="M 4 50 A 46 46 0 0 0 96 50" fill="none" stroke="#000000" strokeWidth="4" />
-              <path d="M 17 17 C 35 30 35 70 17 83" fill="none" stroke="#000000" strokeWidth="4" />
-              <path d="M 83 17 C 65 30 65 70 83 83" fill="none" stroke="#000000" strokeWidth="4" />
+              <circle cx="50" cy="50" r="46" fill="#D97706" stroke="#000000" strokeWidth="4.5" />
+              <circle cx="50" cy="50" r="40" fill="#FBBF24" />
+              <path d="M 50 10 A 40 40 0 0 0 50 90" fill="none" stroke="#78350F" strokeWidth="3" strokeLinecap="round" />
+              <path d="M 10 50 A 40 40 0 0 0 90 50" fill="none" stroke="#78350F" strokeWidth="3" strokeLinecap="round" />
+              <path d="M 21.5 21.5 C 37 32 37 68 21.5 78.5" fill="none" stroke="#78350F" strokeWidth="3" strokeLinecap="round" />
+              <path d="M 78.5 21.5 C 63 32 63 68 78.5 78.5" fill="none" stroke="#78350F" strokeWidth="3" strokeLinecap="round" />
+              <circle cx="32" cy="35" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
+              <circle cx="68" cy="35" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
+              <circle cx="32" cy="65" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
+              <circle cx="68" cy="65" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
+              <circle cx="50" cy="22" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
+              <circle cx="50" cy="78" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
               <text 
                 x="50" 
                 y="59" 
                 textAnchor="middle" 
                 fill="#FFFFFF" 
-                stroke="#000000" 
-                strokeWidth="2.5" 
-                fontSize="28" 
+                stroke="#78350F" 
+                strokeWidth="2" 
+                fontSize="26" 
                 fontWeight="900" 
                 paintOrder="stroke fill"
               >
