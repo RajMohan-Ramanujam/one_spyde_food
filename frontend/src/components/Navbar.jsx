@@ -24,25 +24,23 @@ const Navbar = () => {
       {/* Brand logo (Basketball Pizza - Game + Food Theme) */}
       <div className="flex items-center space-x-2">
         <Link to="/" onClick={() => setSearchQuery('')} className="flex items-center space-x-2">
-          <svg viewBox="0 0 100 100" className="w-7.5 h-7.5 shrink-0 select-none">
-            {/* Pizza Crust */}
-            <circle cx="50" cy="50" r="46" fill="#D97706" stroke="#000000" strokeWidth="4.5" />
-            {/* Cheese Layer */}
-            <circle cx="50" cy="50" r="40" fill="#FBBF24" />
+          <svg viewBox="0 0 100 100" className="w-6.5 h-6.5 shrink-0 select-none">
+            {/* Pizza Crust Box */}
+            <rect x="4" y="4" width="92" height="92" rx="18" fill="#D97706" stroke="#000000" strokeWidth="5" />
+            {/* Cheese Layer Box */}
+            <rect x="10" y="10" width="80" height="80" rx="12" fill="#FBBF24" />
             
             {/* Basketball Seams / Pizza Slice Cuts */}
-            <path d="M 50 10 A 40 40 0 0 0 50 90" fill="none" stroke="#78350F" strokeWidth="3" strokeLinecap="round" />
-            <path d="M 10 50 A 40 40 0 0 0 90 50" fill="none" stroke="#78350F" strokeWidth="3" strokeLinecap="round" />
-            <path d="M 21.5 21.5 C 37 32 37 68 21.5 78.5" fill="none" stroke="#78350F" strokeWidth="3" strokeLinecap="round" />
-            <path d="M 78.5 21.5 C 63 32 63 68 78.5 78.5" fill="none" stroke="#78350F" strokeWidth="3" strokeLinecap="round" />
+            <line x1="50" y1="10" x2="50" y2="90" stroke="#78350F" strokeWidth="4.5" strokeLinecap="round" />
+            <line x1="10" y1="50" x2="90" y2="50" stroke="#78350F" strokeWidth="4.5" strokeLinecap="round" />
+            <path d="M 24 24 C 38 34 38 66 24 76" fill="none" stroke="#78350F" strokeWidth="4.5" strokeLinecap="round" />
+            <path d="M 76 24 C 62 34 62 66 76 76" fill="none" stroke="#78350F" strokeWidth="4.5" strokeLinecap="round" />
             
             {/* Red Pepperoni Toppings */}
-            <circle cx="32" cy="35" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
-            <circle cx="68" cy="35" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
-            <circle cx="32" cy="65" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
-            <circle cx="68" cy="65" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
-            <circle cx="50" cy="22" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
-            <circle cx="50" cy="78" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
+            <circle cx="30" cy="30" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
+            <circle cx="70" cy="30" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
+            <circle cx="30" cy="70" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
+            <circle cx="70" cy="70" r="4.5" fill="#EF4444" stroke="#78350F" strokeWidth="1" />
 
             {/* Stylized 'S' */}
             <text 
@@ -51,8 +49,8 @@ const Navbar = () => {
               textAnchor="middle" 
               fill="#FFFFFF" 
               stroke="#78350F" 
-              strokeWidth="2" 
-              fontSize="26" 
+              strokeWidth="2.5" 
+              fontSize="28" 
               fontWeight="900" 
               paintOrder="stroke fill"
             >
