@@ -15,65 +15,52 @@ const Navbar = () => {
     }
   };
 
-  const clearSearch = () => {
-    setSearchQuery('');
-  };
-
   return (
-    <header className="fixed top-0 left-0 right-0 h-16 bg-[#181818] border-b border-white/10 z-30 px-4 md:px-8 flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 z-30 px-4 md:px-8 flex items-center justify-between shadow-sm">
       
       {/* Brand logo */}
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-3">
         <Link to="/" className="flex items-center space-x-2">
-          <div className="w-9 h-9 bg-primary rounded-xl flex items-center justify-center text-white font-black text-xl">
+          <div className="w-9 h-9 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold text-xl">
             S
           </div>
-          <span className="font-extrabold text-lg tracking-wider text-white">
-            ONE <span className="text-primary">SPYDE</span>
+          <span className="font-bold text-lg text-gray-800">
+            One <span className="text-orange-500">Spyde</span>
           </span>
         </Link>
-
-        {/* Location Pin */}
-        <div className="hidden lg:flex items-center space-x-1.5 text-xs text-gray-400 max-w-[180px] border-l border-white/10 pl-4">
-          <span className="text-primary">📍</span>
-          <span className="truncate font-semibold">
-            {user && user.address ? user.address : 'Select location...'}
-          </span>
-        </div>
       </div>
 
-      {/* Search Bar */}
+      {/* Search Input */}
       <div className="flex-1 max-w-xs md:max-w-md mx-4 relative">
-        <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none text-gray-500 text-sm">🔍</span>
         <input 
           type="text"
-          placeholder="Search items..."
+          placeholder="Search food items..."
           value={searchQuery}
           onChange={handleSearchChange}
-          className="w-full bg-[#242424] text-gray-200 pl-9 pr-8 py-2 rounded-xl text-sm border border-white/10 focus:outline-none placeholder:text-gray-500"
+          className="w-full bg-gray-100 text-gray-800 pl-4 pr-8 py-2 rounded-lg text-sm border border-gray-300 focus:outline-none focus:border-orange-500 focus:bg-white"
         />
         {searchQuery && (
           <button 
-            onClick={clearSearch}
-            className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-white text-xs"
+            onClick={() => setSearchQuery('')}
+            className="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600 text-xs"
           >
             ✕
           </button>
         )}
       </div>
 
-      {/* Navigation Links directly in Navbar */}
-      <nav className="flex items-center space-x-2 md:space-x-4">
+      {/* Simple Navigation Links */}
+      <nav className="flex items-center space-x-3 md:space-x-6">
         <Link 
           to="/" 
-          className="text-xs md:text-sm text-gray-300 hover:text-white font-bold px-2 py-1 rounded"
+          className="text-sm text-gray-600 hover:text-orange-500 font-semibold"
         >
           Menu
         </Link>
 
         <Link 
           to="/orders" 
-          className="text-xs md:text-sm text-gray-300 hover:text-white font-bold px-2 py-1 rounded"
+          className="text-sm text-gray-600 hover:text-orange-500 font-semibold"
         >
           Orders
         </Link>
@@ -81,7 +68,7 @@ const Navbar = () => {
         {user && user.role === 'admin' && (
           <Link 
             to="/admin" 
-            className="text-xs md:text-sm text-primary hover:text-primary-light font-bold px-2 py-1 rounded"
+            className="text-sm text-orange-500 hover:text-orange-600 font-semibold"
           >
             Admin
           </Link>
@@ -89,19 +76,19 @@ const Navbar = () => {
 
         <Link 
           to="/profile" 
-          className="text-xs md:text-sm text-gray-300 hover:text-white font-bold px-2 py-1 rounded"
+          className="text-sm text-gray-600 hover:text-orange-500 font-semibold"
         >
           Profile
         </Link>
 
-        {/* Cart Link with Badge */}
+        {/* Cart Link with Simple Badge */}
         <Link 
           to="/cart"
-          className="relative p-2 bg-[#242424] hover:bg-white/5 border border-white/10 rounded-xl flex items-center justify-center"
+          className="relative p-2 bg-gray-100 hover:bg-gray-200 rounded-lg flex items-center justify-center border border-gray-300"
         >
-          <span className="text-base text-gray-300">🛒</span>
+          <span className="text-base">🛒</span>
           {cartItemCount > 0 && (
-            <span className="absolute -top-1.5 -right-1.5 bg-primary text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border border-black">
+            <span className="absolute -top-1.5 -right-1.5 bg-orange-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
               {cartItemCount}
             </span>
           )}
@@ -109,7 +96,7 @@ const Navbar = () => {
 
         <button 
           onClick={logout}
-          className="text-xs md:text-sm text-rose-500 hover:text-rose-400 font-bold px-2 py-1"
+          className="text-sm text-red-500 hover:text-red-600 font-semibold"
         >
           Logout
         </button>

@@ -32,10 +32,10 @@ const FoodDetails = () => {
   if (!food) {
     return (
       <div className="text-center py-20">
-        <h3 className="text-xl font-bold text-gray-300">Food item not found</h3>
+        <h3 className="text-lg font-bold text-gray-700">Food item not found</h3>
         <button 
           onClick={() => navigate('/')}
-          className="mt-4 bg-primary text-white py-2 px-6 rounded-xl"
+          className="mt-4 bg-orange-500 text-white py-2 px-6 rounded-lg text-sm"
         >
           Back to Menu
         </button>
@@ -53,21 +53,21 @@ const FoodDetails = () => {
     : originalPrice;
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 pb-12">
+    <div className="max-w-3xl mx-auto space-y-6 pb-12">
       {/* Back Button */}
       <button 
         onClick={() => navigate(-1)}
-        className="flex items-center space-x-2 text-gray-400 hover:text-white"
+        className="flex items-center space-x-1.5 text-gray-500 hover:text-orange-500"
       >
         <span>⬅️</span>
-        <span className="text-sm font-semibold">Back to Menu</span>
+        <span className="text-xs font-bold">Back to Menu</span>
       </button>
 
       {/* Main Details Panel */}
-      <div className="bg-[#181818] border border-white/10 rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
+      <div className="bg-white border border-gray-200 rounded-xl overflow-hidden grid grid-cols-1 md:grid-cols-2 shadow-sm">
         
         {/* Left Side: Food Image */}
-        <div className="relative h-64 md:h-auto min-h-[300px] bg-[#242424]">
+        <div className="relative h-64 md:h-auto min-h-[250px] bg-gray-100">
           <img 
             src={food.image_url} 
             alt={food.name} 
@@ -76,103 +76,103 @@ const FoodDetails = () => {
           {/* Favorite heart overlay */}
           <button 
             onClick={() => setIsFavorite(!isFavorite)}
-            className="absolute top-4 right-4 w-10 h-10 bg-black/60 hover:bg-black/90 text-white rounded-full flex items-center justify-center border border-white/10"
+            className="absolute top-4 right-4 w-9 h-9 bg-white/80 hover:bg-white text-gray-800 rounded-full flex items-center justify-center border border-gray-200 shadow"
           >
-            <span className="text-lg">{isFavorite ? '❤️' : '🤍'}</span>
+            <span className="text-base">{isFavorite ? '❤️' : '🤍'}</span>
           </button>
           
           {/* Discount overlay */}
           {discountPercent > 0 && (
-            <div className="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-md uppercase tracking-wider">
+            <div className="absolute top-4 left-4 bg-orange-500 text-white text-[10px] font-bold px-2.5 py-1 rounded shadow">
               {discountPercent}% OFF Special
             </div>
           )}
         </div>
 
         {/* Right Side: Specifications */}
-        <div className="p-6 md:p-10 flex flex-col justify-between space-y-6">
+        <div className="p-6 md:p-8 flex flex-col justify-between space-y-5">
           
           {/* Identity & Tags */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               {/* Veg / Non-Veg Indicator */}
-              <div className="flex items-center space-x-2 bg-black/40 px-3 py-1 rounded-full border border-white/10">
+              <div className="flex items-center space-x-1.5 bg-gray-100 px-2.5 py-0.5 rounded-full border border-gray-200">
                 {food.is_veg === 1 ? (
                   <>
-                    <div className="w-3 h-3 border border-emerald-500 rounded-sm p-0.5 flex items-center justify-center shrink-0">
-                      <div className="w-1 h-1 bg-emerald-500 rounded-full"></div>
+                    <div className="w-3 h-3 border border-emerald-600 rounded-sm p-0.5 flex items-center justify-center shrink-0">
+                      <div className="w-1 h-1 bg-emerald-600 rounded-full"></div>
                     </div>
-                    <span className="text-xs text-emerald-400 font-bold uppercase tracking-wider">Vegetarian</span>
+                    <span className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider">Vegetarian</span>
                   </>
                 ) : (
                   <>
-                    <div className="w-3 h-3 border border-rose-500 rounded-sm flex items-center justify-center relative shrink-0">
-                      <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-b-[6px] border-b-rose-500"></div>
+                    <div className="w-3 h-3 border border-red-600 rounded-sm flex items-center justify-center relative shrink-0">
+                      <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-b-[5px] border-b-red-600"></div>
                     </div>
-                    <span className="text-xs text-rose-400 font-bold uppercase tracking-wider">Non-Vegetarian</span>
+                    <span className="text-[10px] text-red-600 font-bold uppercase tracking-wider">Non-Veg</span>
                   </>
                 )}
               </div>
 
               {/* Rating */}
-              <div className="flex items-center text-amber-500 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/10 font-bold">
+              <div className="flex items-center text-amber-500 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200 font-bold">
                 <span className="mr-1 text-xs">⭐</span>
-                <span className="text-xs text-white">{Number(food.rating).toFixed(1)} / 5</span>
+                <span className="text-xs text-gray-700">{Number(food.rating).toFixed(1)} / 5</span>
               </div>
             </div>
 
-            <h1 className="text-2xl md:text-3xl font-extrabold text-white leading-tight">
+            <h1 className="text-xl md:text-2xl font-bold text-gray-800 leading-tight">
               {food.name}
             </h1>
             
-            <span className="inline-block text-xs bg-[#242424] text-gray-300 font-bold px-3 py-1 rounded-full border border-white/10">
+            <span className="inline-block text-xs bg-gray-100 text-gray-600 font-semibold px-2.5 py-0.5 rounded border border-gray-200">
               Category: {food.category}
             </span>
           </div>
 
           {/* Description */}
-          <div className="space-y-2">
-            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest">About this dish</h4>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              {food.description || "Indulge in our mouthwatering, chef-special creation, prepared with the freshest ingredients, herbs, and spices to perfection. Served hot and fresh."}
+          <div className="space-y-1">
+            <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">About this dish</h4>
+            <p className="text-gray-600 text-xs leading-relaxed">
+              {food.description || "Freshly cooked specialty dish made with selected spices and fresh local ingredients. Prepared under hygienic environment."}
             </p>
           </div>
 
           {/* Highlights */}
-          <div className="space-y-2">
-            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest">Highlights</h4>
-            <div className="flex flex-wrap gap-2 text-xs text-gray-400">
-              <span className="bg-[#242424] px-3 py-1 rounded-lg">✨ Freshly Prepared</span>
-              <span className="bg-[#242424] px-3 py-1 rounded-lg">🚀 Quick Delivery</span>
-              <span className="bg-[#242424] px-3 py-1 rounded-lg">🧼 Hygienically Packed</span>
+          <div className="space-y-1">
+            <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Highlights</h4>
+            <div className="flex flex-wrap gap-1.5 text-[10px] text-gray-500">
+              <span className="bg-gray-100 px-2 py-0.5 rounded">✨ Freshly Prepared</span>
+              <span className="bg-gray-100 px-2 py-0.5 rounded">🚀 Fast Delivery</span>
+              <span className="bg-gray-100 px-2 py-0.5 rounded">🧼 Clean Kitchen</span>
             </div>
           </div>
 
           {/* Checkout & Quantity Picker */}
-          <div className="pt-6 border-t border-white/10 flex items-center justify-between">
+          <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
             <div className="flex flex-col">
-              <span className="text-xs text-gray-500 font-bold">Total Price</span>
-              <div className="flex items-baseline space-x-2">
-                <span className="text-2xl font-black text-white">₹{finalPrice}</span>
+              <span className="text-[10px] text-gray-400 font-bold uppercase">Price</span>
+              <div className="flex items-baseline space-x-1.5">
+                <span className="text-lg font-bold text-gray-900">₹{finalPrice}</span>
                 {discountPercent > 0 && (
-                  <span className="text-sm text-gray-500 line-through font-semibold">₹{originalPrice}</span>
+                  <span className="text-xs text-gray-400 line-through">₹{originalPrice}</span>
                 )}
               </div>
             </div>
 
             <div>
               {quantity > 0 ? (
-                <div className="flex items-center bg-primary text-white rounded-xl border border-primary overflow-hidden font-bold">
+                <div className="flex items-center bg-orange-500 text-white rounded-lg overflow-hidden font-bold">
                   <button 
                     onClick={() => updateCartQty(food.id, quantity - 1)}
-                    className="px-4 py-2 hover:bg-primary-dark"
+                    className="px-3 py-1.5 hover:bg-orange-600 text-xs font-bold"
                   >
                     -
                   </button>
-                  <span className="px-3 text-base min-w-[24px] text-center">{quantity}</span>
+                  <span className="px-3 text-xs min-w-[20px] text-center font-bold">{quantity}</span>
                   <button 
                     onClick={() => updateCartQty(food.id, quantity + 1)}
-                    className="px-4 py-2 hover:bg-primary-dark"
+                    className="px-3 py-1.5 hover:bg-orange-600 text-xs font-bold"
                   >
                     +
                   </button>
@@ -180,7 +180,7 @@ const FoodDetails = () => {
               ) : (
                 <button 
                   onClick={() => addToCart(food.id)}
-                  className="bg-primary hover:bg-primary-dark text-white font-bold px-8 py-3 rounded-xl text-sm uppercase tracking-wider"
+                  className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-5 py-2 rounded-lg text-xs uppercase tracking-wide transition-colors"
                 >
                   Add to Cart
                 </button>

@@ -26,7 +26,7 @@ const Login = () => {
       console.error(err);
       
       if (err.response?.status === 403 && err.response?.data?.unverified) {
-        setError('Your account is not verified yet. Redirecting to OTP verification...');
+        setError('Your account is unverified. Redirecting to OTP page...');
         setTimeout(() => {
           navigate('/verify-otp', {
             state: { 
@@ -45,45 +45,45 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#121212] flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-[#181818] border border-white/10 p-8 rounded-3xl relative">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-white border border-gray-200 p-8 rounded-xl relative shadow-sm">
         
         {/* Logo and Headings */}
-        <div className="text-center mb-8">
-          <div className="inline-flex w-12 h-12 bg-primary rounded-2xl items-center justify-center text-white font-black text-2xl mb-3">
+        <div className="text-center mb-6">
+          <div className="inline-flex w-11 h-11 bg-orange-500 rounded-lg items-center justify-center text-white font-bold text-xl mb-3">
             S
           </div>
-          <h2 className="text-2xl font-bold text-white">Welcome back</h2>
-          <p className="text-gray-400 text-sm mt-1">Sign in to order your favorite food!</p>
+          <h2 className="text-xl font-bold text-gray-800">Welcome back</h2>
+          <p className="text-gray-500 text-xs mt-1">Sign in to order your favorite food!</p>
         </div>
 
         {/* Error Alert */}
         {error && (
-          <div className="bg-rose-500/10 border border-rose-500/20 text-rose-500 text-xs px-4 py-3 rounded-xl mb-6 font-semibold">
+          <div className="bg-rose-50 border border-rose-200 text-rose-800 text-xs px-4 py-3 rounded-lg mb-5 font-semibold">
             {error}
           </div>
         )}
 
         {/* Login Form */}
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-4">
           {/* Email */}
           <div>
-            <label className="block text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">Email Address</label>
+            <label className="block text-gray-500 text-xs font-semibold mb-1.5">Email Address</label>
             <input 
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="johndoe@example.com"
-              className="w-full bg-[#242424] border border-white/10 text-white px-4 py-3 rounded-xl text-sm focus:outline-none"
+              className="w-full bg-gray-50 border border-gray-200 text-gray-800 px-3.5 py-2.5 rounded-lg text-xs focus:outline-none focus:bg-white focus:border-orange-500"
             />
           </div>
 
           {/* Password */}
           <div>
-            <div className="flex justify-between items-center mb-2">
-              <label className="text-gray-400 text-xs font-bold uppercase tracking-wider">Password</label>
-              <Link to="/forgot-password" className="text-primary text-xs hover:underline font-bold">
+            <div className="flex justify-between items-center mb-1.5">
+              <label className="text-gray-500 text-xs font-semibold">Password</label>
+              <Link to="/forgot-password" className="text-orange-500 text-xs hover:underline font-bold">
                 Forgot password?
               </Link>
             </div>
@@ -93,7 +93,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full bg-[#242424] border border-white/10 text-white px-4 py-3 rounded-xl text-sm focus:outline-none"
+              className="w-full bg-gray-50 border border-gray-200 text-gray-800 px-3.5 py-2.5 rounded-lg text-xs focus:outline-none focus:bg-white focus:border-orange-500"
             />
           </div>
 
@@ -101,23 +101,20 @@ const Login = () => {
           <button 
             type="submit"
             disabled={loading}
-            className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3.5 rounded-xl flex items-center justify-center space-x-2 text-sm disabled:opacity-50"
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg flex items-center justify-center space-x-2 text-xs uppercase tracking-wide disabled:opacity-50 transition-colors"
           >
             {loading ? (
-              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
             ) : (
-              <>
-                <span>Sign In</span>
-                <span>➔</span>
-              </>
+              "Sign In ➔"
             )}
           </button>
         </form>
 
         {/* Register Redirect */}
-        <p className="text-center text-gray-400 text-xs mt-8">
+        <p className="text-center text-gray-500 text-xs mt-6">
           Don't have an account?{' '}
-          <Link to="/register" className="text-primary font-bold hover:underline">
+          <Link to="/register" className="text-orange-500 font-bold hover:underline">
             Register here
           </Link>
         </p>

@@ -51,29 +51,29 @@ const Home = () => {
   }, [selectedCategory, isVegOnly, searchQuery]);
 
   return (
-    <div className="space-y-8 pb-12">
+    <div className="space-y-6 pb-12">
       
-      {/* Promotional Discount Slider */}
+      {/* Promo banner */}
       <Slider />
 
-      {/* Circular Food Categories */}
+      {/* Categories */}
       <div className="space-y-3">
-        <h2 className="text-lg font-bold text-gray-200 uppercase tracking-wider flex items-center">
-          <span className="w-1.5 h-6 bg-primary rounded mr-2"></span>
+        <h2 className="text-base font-bold text-gray-800 uppercase tracking-wider flex items-center">
+          <span className="w-1.5 h-5 bg-orange-500 rounded mr-2"></span>
           What's on your mind?
         </h2>
-        <div className="flex space-x-5 overflow-x-auto pb-4">
+        <div className="flex space-x-4 overflow-x-auto pb-3">
           {categories.map((cat) => (
             <button
               key={cat.name}
               onClick={() => setSelectedCategory(cat.name)}
-              className="flex flex-col items-center space-y-2 shrink-0 group focus:outline-none"
+              className="flex flex-col items-center space-y-1.5 shrink-0 group focus:outline-none"
             >
               <div 
-                className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden p-1 border-2 transition-all ${
+                className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden p-0.5 border-2 transition-all ${
                   selectedCategory === cat.name 
-                    ? 'border-primary bg-primary/10' 
-                    : 'border-white/10 bg-[#181818]'
+                    ? 'border-orange-500 bg-orange-50' 
+                    : 'border-gray-200 bg-white'
                 }`}
               >
                 <img 
@@ -83,8 +83,8 @@ const Home = () => {
                 />
               </div>
               <span 
-                className={`text-xs sm:text-sm font-semibold ${
-                  selectedCategory === cat.name ? 'text-primary' : 'text-gray-400 group-hover:text-white'
+                className={`text-xs font-semibold ${
+                  selectedCategory === cat.name ? 'text-orange-500 font-bold' : 'text-gray-500'
                 }`}
               >
                 {cat.name}
@@ -94,28 +94,28 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Filters and Toggle Section */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-white/10">
+      {/* Filters bar */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-gray-200">
         <div className="flex items-center space-x-2">
-          <span className="text-primary text-lg">🍴</span>
-          <h2 className="text-xl font-bold text-white tracking-wide">
+          <span className="text-orange-500 text-lg">🍴</span>
+          <h2 className="text-lg font-bold text-gray-800">
             {selectedCategory === 'All' ? 'Popular Dishes' : `${selectedCategory} Specials`}
           </h2>
-          <span className="text-xs bg-[#242424] text-gray-400 px-2.5 py-0.5 rounded-full font-bold">
+          <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded font-bold">
             {foods.length} items
           </span>
         </div>
 
-        {/* Veg Only Switch */}
+        {/* Veg Only */}
         <button
           onClick={() => setIsVegOnly(!isVegOnly)}
-          className="flex items-center space-x-3 bg-[#181818] border border-white/10 px-4 py-2 rounded-xl"
+          className="flex items-center space-x-2.5 bg-white border border-gray-200 px-3.5 py-1.5 rounded-lg text-xs"
         >
-          <div className="w-4 h-4 border-2 border-emerald-500 rounded-sm p-0.5 flex items-center justify-center shrink-0">
-            <div className="w-1.5 h-1.5 bg-emerald-50 rounded-full"></div>
+          <div className="w-3.5 h-3.5 border border-emerald-500 rounded-sm p-0.5 flex items-center justify-center shrink-0">
+            <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>
           </div>
-          <span className="text-xs font-bold text-gray-300 tracking-wide">VEG ONLY</span>
-          <span className={`text-xs font-bold px-2 py-0.5 rounded ${isVegOnly ? 'bg-emerald-600 text-white' : 'bg-gray-600 text-gray-200'}`}>
+          <span className="font-bold text-gray-600">VEG ONLY</span>
+          <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${isVegOnly ? 'bg-emerald-500 text-white' : 'bg-gray-300 text-gray-600'}`}>
             {isVegOnly ? 'ON' : 'OFF'}
           </span>
         </button>
@@ -131,18 +131,18 @@ const Home = () => {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center py-20 text-center space-y-4">
-          <span className="text-4xl">🍕</span>
-          <h3 className="text-lg font-bold text-gray-300">No dishes found</h3>
-          <p className="text-gray-500 text-sm max-w-xs">
-            We couldn't find any items matching your filters or search terms. Try adjusting them!
+        <div className="flex flex-col items-center justify-center py-16 text-center space-y-3 bg-white border border-gray-200 rounded-xl">
+          <span className="text-3xl">🍕</span>
+          <h3 className="text-base font-bold text-gray-700">No dishes found</h3>
+          <p className="text-gray-400 text-xs max-w-xs">
+            Try adjusting your search criteria or selected category filter!
           </p>
           <button
             onClick={() => {
               setSelectedCategory('All');
               setIsVegOnly(false);
             }}
-            className="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-5 rounded-xl text-sm"
+            className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-1.5 px-4 rounded-lg text-xs"
           >
             Reset Filters
           </button>

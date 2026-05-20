@@ -68,23 +68,23 @@ const Cart = () => {
       console.error(err);
       setError(err.response?.data?.message || 'Failed to place order. Try logging in again.');
     } finally {
-      setLoading(false);
+      loading(false);
     }
   };
 
   if (cart.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 text-center space-y-5">
-        <div className="w-20 h-20 bg-[#181818] border border-white/10 rounded-3xl flex items-center justify-center text-primary text-3xl">
+      <div className="flex flex-col items-center justify-center py-20 text-center space-y-4">
+        <div className="w-16 h-16 bg-gray-100 border border-gray-200 rounded-full flex items-center justify-center text-3xl">
           🛒
         </div>
-        <h2 className="text-xl font-bold text-gray-200">Your cart is empty</h2>
-        <p className="text-gray-400 text-sm max-w-xs leading-relaxed">
-          Looks like you haven't added anything to your cart yet. Head back to the main menu!
+        <h2 className="text-lg font-bold text-gray-700">Your cart is empty</h2>
+        <p className="text-gray-500 text-xs max-w-xs leading-relaxed">
+          Looks like you haven't added anything to your cart yet. Head back to the menu!
         </p>
         <Link 
           to="/"
-          className="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-xl text-sm"
+          className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2.5 px-6 rounded-lg text-xs"
         >
           Browse Menu
         </Link>
@@ -93,25 +93,25 @@ const Cart = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 pb-12">
-      <h1 className="text-2xl font-bold text-white tracking-wide">Secure Checkout</h1>
+    <div className="max-w-4xl mx-auto space-y-6 pb-12">
+      <h1 className="text-xl font-bold text-gray-800">Secure Checkout</h1>
 
       {error && (
-        <div className="bg-rose-500/10 border border-rose-500/20 text-rose-500 text-xs px-4 py-3 rounded-xl font-semibold">
+        <div className="bg-rose-500/10 border border-rose-500/20 text-rose-500 text-xs px-4 py-3 rounded-lg font-semibold">
           {error}
         </div>
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
         
-        {/* Left Columns: Items List */}
+        {/* Left Side: Items List & Details */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="bg-[#181818] border border-white/10 rounded-3xl p-6 space-y-4">
-            <h2 className="text-base font-bold text-white uppercase tracking-wider border-b border-white/10 pb-3">
+          <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4 shadow-sm">
+            <h2 className="text-sm font-bold text-gray-800 uppercase tracking-wider border-b border-gray-100 pb-3">
               Order Items ({cart.length})
             </h2>
 
-            <div className="divide-y divide-white/10">
+            <div className="divide-y divide-gray-100">
               {cart.map((item) => {
                 const originalPrice = Number(item.price);
                 const discountPercent = Number(item.discount_percent);
@@ -120,36 +120,36 @@ const Cart = () => {
                   : originalPrice;
 
                 return (
-                  <div key={item.food_id} className="flex items-center justify-between py-4 first:pt-0 last:pb-0">
-                    <div className="flex items-center space-x-4">
+                  <div key={item.food_id} className="flex items-center justify-between py-3.5 first:pt-0 last:pb-0">
+                    <div className="flex items-center space-x-3">
                       <img 
                         src={item.image_url} 
                         alt={item.name} 
-                        className="w-14 h-14 object-cover rounded-xl bg-[#242424]"
+                        className="w-12 h-12 object-cover rounded-lg bg-gray-100"
                       />
                       <div>
-                        <h4 className="text-sm font-extrabold text-white line-clamp-1">{item.name}</h4>
-                        <div className="flex items-center space-x-2 text-xs mt-1">
-                          <span className="text-gray-400 font-semibold">₹{finalPrice}</span>
+                        <h4 className="text-xs font-bold text-gray-800 line-clamp-1">{item.name}</h4>
+                        <div className="flex items-center space-x-2 text-[10px] mt-0.5">
+                          <span className="text-gray-700 font-semibold">₹{finalPrice}</span>
                           {discountPercent > 0 && (
-                            <span className="text-gray-600 line-through">₹{originalPrice}</span>
+                            <span className="text-gray-400 line-through">₹{originalPrice}</span>
                           )}
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center bg-[#242424] border border-white/10 text-white rounded-lg overflow-hidden font-bold">
+                    <div className="flex items-center space-x-3">
+                      <div className="flex items-center bg-gray-100 border border-gray-200 text-gray-800 rounded overflow-hidden">
                         <button 
                           onClick={() => updateCartQty(item.food_id, item.quantity - 1)}
-                          className="px-2.5 py-1 hover:bg-[#181818] text-xs"
+                          className="px-2 py-0.5 hover:bg-gray-200 text-xs font-bold"
                         >
                           -
                         </button>
-                        <span className="px-2 text-xs min-w-[16px] text-center">{item.quantity}</span>
+                        <span className="px-2 text-xs min-w-[12px] text-center font-semibold">{item.quantity}</span>
                         <button 
                           onClick={() => updateCartQty(item.food_id, item.quantity + 1)}
-                          className="px-2.5 py-1 hover:bg-[#181818] text-xs"
+                          className="px-2 py-0.5 hover:bg-gray-200 text-xs font-bold"
                         >
                           +
                         </button>
@@ -157,7 +157,7 @@ const Cart = () => {
 
                       <button 
                         onClick={() => removeFromCart(item.food_id)}
-                        className="text-gray-500 hover:text-rose-500 p-1 text-sm"
+                        className="text-gray-400 hover:text-red-500 text-xs"
                       >
                         🗑️
                       </button>
@@ -169,29 +169,29 @@ const Cart = () => {
           </div>
 
           {/* Delivery Details Form */}
-          <div className="bg-[#181818] border border-white/10 rounded-3xl p-6">
-            <h2 className="text-base font-bold text-white uppercase tracking-wider border-b border-white/10 pb-3 mb-4">
+          <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+            <h2 className="text-sm font-bold text-gray-800 uppercase tracking-wider border-b border-gray-100 pb-3 mb-4">
               Delivery Details
             </h2>
 
             <form className="space-y-4">
               <div>
-                <label className="block text-gray-400 text-xs font-bold uppercase tracking-wider mb-2 flex items-center">
-                  <span className="mr-1.5">📍</span> Delivery Address
+                <label className="block text-gray-500 text-xs font-semibold mb-2">
+                  📍 Delivery Address
                 </label>
                 <textarea 
                   rows={2}
                   required
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  placeholder="Enter full flat address, block number, street, city..."
-                  className="w-full bg-[#242424] border border-white/10 text-white p-3.5 rounded-xl text-sm focus:outline-none"
+                  placeholder="Enter full street address, flat number, city..."
+                  className="w-full bg-gray-50 border border-gray-200 text-gray-800 p-3 rounded-lg text-xs focus:outline-none focus:bg-white focus:border-orange-500"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-400 text-xs font-bold uppercase tracking-wider mb-2 flex items-center">
-                  <span className="mr-1.5">📞</span> Contact Number
+                <label className="block text-gray-500 text-xs font-semibold mb-2">
+                  📞 Contact Number
                 </label>
                 <input 
                   type="tel"
@@ -199,59 +199,56 @@ const Cart = () => {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="Enter 10 digit number"
-                  className="w-full bg-[#242424] border border-white/10 text-white px-3.5 py-3 rounded-xl text-sm focus:outline-none"
+                  className="w-full bg-gray-50 border border-gray-200 text-gray-800 px-3 py-2 rounded-lg text-xs focus:outline-none focus:bg-white focus:border-orange-500"
                 />
               </div>
             </form>
           </div>
         </div>
 
-        {/* Right Column: Price summary */}
+        {/* Right Side: Price Summary */}
         <div className="space-y-4">
-          <div className="bg-[#181818] border border-white/10 rounded-3xl p-6 space-y-4">
-            <h2 className="text-base font-bold text-white uppercase tracking-wider border-b border-white/10 pb-3">
+          <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4 shadow-sm">
+            <h2 className="text-sm font-bold text-gray-800 uppercase tracking-wider border-b border-gray-100 pb-3">
               Bill Details
             </h2>
 
-            <div className="space-y-3 text-sm text-gray-400">
+            <div className="space-y-2.5 text-xs text-gray-500">
               <div className="flex justify-between">
                 <span>Item Subtotal</span>
-                <span className="text-gray-200 font-semibold">₹{subtotal}</span>
+                <span className="text-gray-700 font-semibold">₹{subtotal}</span>
               </div>
               <div className="flex justify-between">
                 <span>Delivery Partner Fee</span>
-                <span className="text-emerald-500 font-semibold">₹{deliveryFee}</span>
+                <span className="text-emerald-600 font-semibold font-bold">₹{deliveryFee}</span>
               </div>
               <div className="flex justify-between">
                 <span>Taxes & Handling Fee</span>
-                <span className="text-gray-200 font-semibold">₹{platformFee}</span>
+                <span className="text-gray-700 font-semibold">₹{platformFee}</span>
               </div>
               
-              <div className="flex justify-between border-t border-white/10 pt-4 text-white font-extrabold text-base">
+              <div className="flex justify-between border-t border-gray-100 pt-3.5 text-gray-800 font-bold text-sm">
                 <span>Grand Total</span>
-                <span className="text-primary">₹{grandTotal}</span>
+                <span className="text-orange-500">₹{grandTotal}</span>
               </div>
             </div>
 
-            {/* Simulated Payment badge */}
-            <div className="bg-[#242424] p-3.5 rounded-2xl border border-white/10 flex items-center space-x-3 text-xs text-gray-400">
-              <span className="text-lg">💳</span>
-              <span>Simulated Instant Payment (Cashless/UPI) activated</span>
+            {/* Simulated Payment */}
+            <div className="bg-gray-50 p-3 rounded-lg border border-gray-100 flex items-center space-x-2 text-[10px] text-gray-500">
+              <span className="text-base">💳</span>
+              <span>Instant Payment (UPI/Cashless) is simulated</span>
             </div>
 
-            {/* Place Order Button */}
+            {/* Place Order */}
             <button 
               onClick={handleCheckout}
               disabled={loading || cart.length === 0}
-              className="w-full bg-primary hover:bg-primary-dark disabled:opacity-50 text-white font-bold py-3.5 rounded-xl flex items-center justify-center space-x-2 text-sm uppercase tracking-wider"
+              className="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white font-bold py-3 rounded-lg text-xs uppercase tracking-wide transition-colors"
             >
               {loading ? (
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>
               ) : (
-                <>
-                  <span>Place Order & Pay</span>
-                  <span>➔</span>
-                </>
+                "Place Order & Pay ➔"
               )}
             </button>
           </div>

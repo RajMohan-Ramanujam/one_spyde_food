@@ -54,42 +54,42 @@ const Profile = () => {
 
   if (!user) {
     return (
-      <div className="max-w-2xl mx-auto py-16 text-center text-gray-400">
+      <div className="max-w-2xl mx-auto py-16 text-center text-gray-500">
         <p>Please sign in to view your profile settings.</p>
       </div>
     );
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6 pb-12">
-      <div className="flex items-center space-x-2.5">
-        <span className="text-2xl">👤</span>
-        <h1 className="text-2xl font-bold text-white tracking-wide">Profile Settings</h1>
+    <div className="max-w-xl mx-auto space-y-6 pb-12">
+      <div className="flex items-center space-x-2">
+        <span className="text-xl">👤</span>
+        <h1 className="text-xl font-bold text-gray-800">Profile Settings</h1>
       </div>
 
       {success && (
-        <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs px-4 py-3.5 rounded-xl font-bold">
+        <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs px-4 py-3 rounded-lg font-bold">
           ✓ {success}
         </div>
       )}
 
       {error && (
-        <div className="bg-rose-500/10 border border-rose-500/20 text-rose-500 text-xs px-4 py-3.5 rounded-xl font-bold">
+        <div className="bg-rose-50 border border-rose-200 text-rose-800 text-xs px-4 py-3 rounded-lg font-bold">
           ⚠️ {error}
         </div>
       )}
 
-      <div className="bg-[#181818] border border-white/10 rounded-3xl p-6 md:p-8">
-        <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+        <form onSubmit={handleSubmit} className="space-y-5">
           
-          {/* Avatar Circle */}
-          <div className="flex items-center space-x-5 border-b border-white/10 pb-6">
-            <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white font-extrabold text-2xl">
+          {/* Avatar Area */}
+          <div className="flex items-center space-x-4 border-b border-gray-100 pb-5">
+            <div className="w-14 h-14 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
               {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
             </div>
             <div>
-              <h3 className="font-bold text-white text-base leading-snug">{user.name}</h3>
-              <p className="text-xs text-gray-500 mt-0.5">{user.email}</p>
+              <h3 className="font-bold text-gray-800 text-base">{user.name}</h3>
+              <p className="text-xs text-gray-400 mt-0.5">{user.email}</p>
             </div>
           </div>
 
@@ -98,7 +98,7 @@ const Profile = () => {
             
             {/* Full Name */}
             <div>
-              <label className="block text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">👤 Full Name</label>
+              <label className="block text-gray-500 text-xs font-semibold mb-1.5">Full Name</label>
               <input 
                 type="text"
                 name="name"
@@ -106,44 +106,44 @@ const Profile = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Your Name"
-                className="w-full bg-[#242424] border border-white/10 text-white px-4 py-3 rounded-xl text-sm focus:outline-none"
+                className="w-full bg-gray-50 border border-gray-200 text-gray-800 px-3.5 py-2.5 rounded-lg text-xs focus:outline-none focus:bg-white focus:border-orange-500"
               />
             </div>
 
             {/* Email */}
             <div>
-              <label className="block text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">📧 Email Address</label>
+              <label className="block text-gray-500 text-xs font-semibold mb-1.5">Email Address</label>
               <input 
                 type="email"
                 disabled
                 value={user.email}
-                className="w-full bg-[#121212] border border-white/10 text-gray-500 px-4 py-3 rounded-xl text-sm cursor-not-allowed"
+                className="w-full bg-gray-100 border border-gray-200 text-gray-400 px-3.5 py-2.5 rounded-lg text-xs cursor-not-allowed"
               />
             </div>
 
             {/* Phone Number */}
             <div>
-              <label className="block text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">📞 Phone Number</label>
+              <label className="block text-gray-500 text-xs font-semibold mb-1.5">Phone Number</label>
               <input 
                 type="tel"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="+91 98765 43210"
-                className="w-full bg-[#242424] border border-white/10 text-white px-4 py-3 rounded-xl text-sm focus:outline-none"
+                className="w-full bg-gray-50 border border-gray-200 text-gray-800 px-3.5 py-2.5 rounded-lg text-xs focus:outline-none focus:bg-white focus:border-orange-500"
               />
             </div>
 
             {/* Default Delivery Address */}
             <div>
-              <label className="block text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">📍 Default Address</label>
+              <label className="block text-gray-500 text-xs font-semibold mb-1.5">Default Address</label>
               <textarea 
                 rows={3}
                 name="address"
                 value={formData.address}
                 onChange={handleChange}
-                placeholder="House No, Floor, Street Address, Landmark, City..."
-                className="w-full bg-[#242424] border border-white/10 text-white px-4 py-3 rounded-xl text-sm focus:outline-none"
+                placeholder="Flat details, street, city..."
+                className="w-full bg-gray-50 border border-gray-200 text-gray-800 px-3.5 py-2.5 rounded-lg text-xs focus:outline-none focus:bg-white focus:border-orange-500"
               />
             </div>
 
@@ -153,9 +153,9 @@ const Profile = () => {
           <button 
             type="submit"
             disabled={loading}
-            className="bg-primary hover:bg-primary-dark text-white font-bold px-8 py-3 rounded-xl text-sm uppercase tracking-wider disabled:opacity-50"
+            className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-2.5 rounded-lg text-xs uppercase tracking-wide disabled:opacity-50 transition-colors"
           >
-            {loading ? 'Saving Changes...' : 'Save Profile'}
+            {loading ? 'Saving...' : 'Save Profile'}
           </button>
 
         </form>

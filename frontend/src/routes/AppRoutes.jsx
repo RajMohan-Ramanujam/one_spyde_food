@@ -25,7 +25,7 @@ const MainLayout = ({ children }) => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0b0b0b] flex flex-col">
+    <div className="min-h-screen bg-[#f9f9f9] flex flex-col">
       {/* Header Navbar */}
       <Navbar />
 
