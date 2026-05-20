@@ -70,7 +70,7 @@ const Home = () => {
               className="flex flex-col items-center space-y-2 shrink-0 group focus:outline-none"
             >
               <div 
-                className={`w-18 h-18 sm:w-22 sm:h-22 rounded-full overflow-hidden p-1 border-2 transition-all ${
+                className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden p-1 border-2 transition-all ${
                   selectedCategory === cat.name 
                     ? 'border-primary bg-primary/10' 
                     : 'border-white/10 bg-[#181818]'
