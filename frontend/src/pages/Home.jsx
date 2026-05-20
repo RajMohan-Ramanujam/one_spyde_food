@@ -4,7 +4,6 @@ import API from '../api/axios';
 import FoodCard from '../components/FoodCard';
 import Slider from '../components/Slider';
 import Loader from '../components/Loader';
-import { ToggleLeft, ToggleRight, Filter } from 'lucide-react';
 
 const categories = [
   { name: 'All', image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=150&auto=format&fit=crop&q=60' },
@@ -24,7 +23,6 @@ const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [isVegOnly, setIsVegOnly] = useState(false);
 
-  // Fetch foods with filters
   const fetchFoods = async () => {
     try {
       setLoading(true);
@@ -53,7 +51,7 @@ const Home = () => {
   }, [selectedCategory, isVegOnly, searchQuery]);
 
   return (
-    <div className="space-y-8 animate-fade-in pb-12">
+    <div className="space-y-8 pb-12">
       
       {/* Promotional Discount Slider */}
       <Slider />
@@ -61,10 +59,10 @@ const Home = () => {
       {/* Circular Food Categories */}
       <div className="space-y-3">
         <h2 className="text-lg font-bold text-gray-200 uppercase tracking-wider flex items-center">
-          <span className="w-1.5 h-6 bg-primary rounded-full mr-2.5"></span>
+          <span className="w-1.5 h-6 bg-primary rounded mr-2"></span>
           What's on your mind?
         </h2>
-        <div className="flex space-x-5 overflow-x-auto pb-4 scrollbar-none scroll-smooth">
+        <div className="flex space-x-5 overflow-x-auto pb-4">
           {categories.map((cat) => (
             <button
               key={cat.name}
@@ -72,10 +70,10 @@ const Home = () => {
               className="flex flex-col items-center space-y-2 shrink-0 group focus:outline-none"
             >
               <div 
-                className={`w-18 h-18 sm:w-22 sm:h-22 rounded-full overflow-hidden p-1 border-2 transition-all duration-300 ${
+                className={`w-18 h-18 sm:w-22 sm:h-22 rounded-full overflow-hidden p-1 border-2 transition-all ${
                   selectedCategory === cat.name 
-                    ? 'border-primary bg-primary/10 scale-105 shadow-lg shadow-primary/15' 
-                    : 'border-white/5 bg-spyde-gray group-hover:border-primary/40 group-hover:scale-102'
+                    ? 'border-primary bg-primary/10' 
+                    : 'border-white/10 bg-[#181818]'
                 }`}
               >
                 <img 
@@ -85,7 +83,7 @@ const Home = () => {
                 />
               </div>
               <span 
-                className={`text-xs sm:text-sm font-semibold transition-colors duration-200 ${
+                className={`text-xs sm:text-sm font-semibold ${
                   selectedCategory === cat.name ? 'text-primary' : 'text-gray-400 group-hover:text-white'
                 }`}
               >
@@ -97,13 +95,13 @@ const Home = () => {
       </div>
 
       {/* Filters and Toggle Section */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-white/5">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-white/10">
         <div className="flex items-center space-x-2">
-          <Filter size={18} className="text-primary" />
-          <h2 className="text-xl font-black text-white tracking-wide">
+          <span className="text-primary text-lg">🍴</span>
+          <h2 className="text-xl font-bold text-white tracking-wide">
             {selectedCategory === 'All' ? 'Popular Dishes' : `${selectedCategory} Specials`}
           </h2>
-          <span className="text-xs bg-spyde-lightgray text-gray-400 px-2.5 py-0.5 rounded-full font-bold">
+          <span className="text-xs bg-[#242424] text-gray-400 px-2.5 py-0.5 rounded-full font-bold">
             {foods.length} items
           </span>
         </div>
@@ -111,17 +109,15 @@ const Home = () => {
         {/* Veg Only Switch */}
         <button
           onClick={() => setIsVegOnly(!isVegOnly)}
-          className="flex items-center space-x-3.5 bg-spyde-gray border border-white/5 hover:border-primary/20 px-4 py-2 rounded-xl transition-all active:scale-[0.98]"
+          className="flex items-center space-x-3 bg-[#181818] border border-white/10 px-4 py-2 rounded-xl"
         >
           <div className="w-4 h-4 border-2 border-emerald-500 rounded-sm p-0.5 flex items-center justify-center shrink-0">
-            <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></div>
+            <div className="w-1.5 h-1.5 bg-emerald-50 rounded-full"></div>
           </div>
           <span className="text-xs font-bold text-gray-300 tracking-wide">VEG ONLY</span>
-          {isVegOnly ? (
-            <ToggleRight size={28} className="text-emerald-500 transition-all duration-300" />
-          ) : (
-            <ToggleLeft size={28} className="text-gray-500 transition-all duration-300" />
-          )}
+          <span className={`text-xs font-bold px-2 py-0.5 rounded ${isVegOnly ? 'bg-emerald-600 text-white' : 'bg-gray-600 text-gray-200'}`}>
+            {isVegOnly ? 'ON' : 'OFF'}
+          </span>
         </button>
       </div>
 
@@ -146,7 +142,7 @@ const Home = () => {
               setSelectedCategory('All');
               setIsVegOnly(false);
             }}
-            className="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-5 rounded-xl transition-colors text-sm"
+            className="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-5 rounded-xl text-sm"
           >
             Reset Filters
           </button>

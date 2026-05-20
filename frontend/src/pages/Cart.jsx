@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { AppContext } from '../App';
-import { Trash2, ShoppingCart, ArrowRight, Minus, Plus, MapPin, Phone, CreditCard } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import API from '../api/axios';
 
@@ -13,7 +12,6 @@ const Cart = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Pre-fill user details if available
   useEffect(() => {
     if (user) {
       setAddress(user.address || '');
@@ -21,7 +19,6 @@ const Cart = () => {
     }
   }, [user]);
 
-  // Calculate pricing math
   const subtotal = cart.reduce((total, item) => {
     const originalPrice = Number(item.price);
     const discountPercent = Number(item.discount_percent);
@@ -49,7 +46,6 @@ const Cart = () => {
     setLoading(true);
 
     try {
-      // Map cart items into simplified array for storage in order table
       const orderItems = cart.map(item => ({
         id: item.food_id,
         name: item.name,
@@ -58,19 +54,15 @@ const Cart = () => {
         quantity: item.quantity
       }));
 
-      // Call API
       await API.post('/orders', {
         items: orderItems,
         totalAmount: grandTotal,
         deliveryAddress: address,
         phone: phone,
-        paymentStatus: 'Paid' // Simulated instant paid checkout
+        paymentStatus: 'Paid'
       });
 
-      // Clear local React state of cart
       clearCart();
-
-      // Redirect to orders page
       navigate('/orders');
     } catch (err) {
       console.error(err);
@@ -82,9 +74,9 @@ const Cart = () => {
 
   if (cart.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 text-center space-y-5 animate-fade-in">
-        <div className="w-20 h-20 bg-spyde-gray border border-white/5 rounded-3xl flex items-center justify-center text-primary shadow-lg shadow-black/40">
-          <ShoppingCart size={36} />
+      <div className="flex flex-col items-center justify-center py-24 text-center space-y-5">
+        <div className="w-20 h-20 bg-[#181818] border border-white/10 rounded-3xl flex items-center justify-center text-primary text-3xl">
+          🛒
         </div>
         <h2 className="text-xl font-bold text-gray-200">Your cart is empty</h2>
         <p className="text-gray-400 text-sm max-w-xs leading-relaxed">
@@ -92,17 +84,17 @@ const Cart = () => {
         </p>
         <Link 
           to="/"
-          className="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-xl transition-all duration-200 shadow-md text-sm active:scale-95"
+          className="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-xl text-sm"
         >
-          Browse Restaurants
+          Browse Menu
         </Link>
       </div>
     );
   }
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 pb-12 animate-fade-in">
-      <h1 className="text-2xl font-black text-white tracking-wide">Secure Checkout</h1>
+    <div className="max-w-6xl mx-auto space-y-6 pb-12">
+      <h1 className="text-2xl font-bold text-white tracking-wide">Secure Checkout</h1>
 
       {error && (
         <div className="bg-rose-500/10 border border-rose-500/20 text-rose-500 text-xs px-4 py-3 rounded-xl font-semibold">
@@ -114,12 +106,12 @@ const Cart = () => {
         
         {/* Left Columns: Items List */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="bg-spyde-gray border border-white/5 rounded-3xl p-6 shadow-xl space-y-4">
-            <h2 className="text-base font-bold text-white uppercase tracking-wider border-b border-white/5 pb-3">
+          <div className="bg-[#181818] border border-white/10 rounded-3xl p-6 space-y-4">
+            <h2 className="text-base font-bold text-white uppercase tracking-wider border-b border-white/10 pb-3">
               Order Items ({cart.length})
             </h2>
 
-            <div className="divide-y divide-white/5">
+            <div className="divide-y divide-white/10">
               {cart.map((item) => {
                 const originalPrice = Number(item.price);
                 const discountPercent = Number(item.discount_percent);
@@ -130,13 +122,11 @@ const Cart = () => {
                 return (
                   <div key={item.food_id} className="flex items-center justify-between py-4 first:pt-0 last:pb-0">
                     <div className="flex items-center space-x-4">
-                      {/* Image */}
                       <img 
                         src={item.image_url} 
                         alt={item.name} 
-                        className="w-14 h-14 object-cover rounded-xl bg-spyde-lightgray"
+                        className="w-14 h-14 object-cover rounded-xl bg-[#242424]"
                       />
-                      {/* Info */}
                       <div>
                         <h4 className="text-sm font-extrabold text-white line-clamp-1">{item.name}</h4>
                         <div className="flex items-center space-x-2 text-xs mt-1">
@@ -148,29 +138,28 @@ const Cart = () => {
                       </div>
                     </div>
 
-                    {/* Controls */}
                     <div className="flex items-center space-x-4">
-                      <div className="flex items-center bg-spyde-lightgray border border-white/5 text-white rounded-lg overflow-hidden font-bold">
+                      <div className="flex items-center bg-[#242424] border border-white/10 text-white rounded-lg overflow-hidden font-bold">
                         <button 
                           onClick={() => updateCartQty(item.food_id, item.quantity - 1)}
-                          className="px-2.5 py-1 hover:bg-spyde-gray transition-all text-xs"
+                          className="px-2.5 py-1 hover:bg-[#181818] text-xs"
                         >
-                          <Minus size={12} />
+                          -
                         </button>
                         <span className="px-2 text-xs min-w-[16px] text-center">{item.quantity}</span>
                         <button 
                           onClick={() => updateCartQty(item.food_id, item.quantity + 1)}
-                          className="px-2.5 py-1 hover:bg-spyde-gray transition-all text-xs"
+                          className="px-2.5 py-1 hover:bg-[#181818] text-xs"
                         >
-                          <Plus size={12} />
+                          +
                         </button>
                       </div>
 
                       <button 
                         onClick={() => removeFromCart(item.food_id)}
-                        className="text-gray-500 hover:text-rose-500 p-1 hover:bg-white/5 rounded-lg transition-colors"
+                        className="text-gray-500 hover:text-rose-500 p-1 text-sm"
                       >
-                        <Trash2 size={16} />
+                        🗑️
                       </button>
                     </div>
                   </div>
@@ -179,16 +168,16 @@ const Cart = () => {
             </div>
           </div>
 
-          {/* Delivery & Address Details Form */}
-          <div className="bg-spyde-gray border border-white/5 rounded-3xl p-6 shadow-xl">
-            <h2 className="text-base font-bold text-white uppercase tracking-wider border-b border-white/5 pb-3 mb-4">
+          {/* Delivery Details Form */}
+          <div className="bg-[#181818] border border-white/10 rounded-3xl p-6">
+            <h2 className="text-base font-bold text-white uppercase tracking-wider border-b border-white/10 pb-3 mb-4">
               Delivery Details
             </h2>
 
             <form className="space-y-4">
               <div>
-                <label className="block text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center">
-                  <MapPin size={14} className="mr-1.5 text-primary" /> Delivery Address
+                <label className="block text-gray-400 text-xs font-bold uppercase tracking-wider mb-2 flex items-center">
+                  <span className="mr-1.5">📍</span> Delivery Address
                 </label>
                 <textarea 
                   rows={2}
@@ -196,13 +185,13 @@ const Cart = () => {
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="Enter full flat address, block number, street, city..."
-                  className="w-full bg-spyde-lightgray border border-white/5 text-white p-3.5 rounded-xl text-sm focus:border-primary/50 focus:outline-none transition-colors"
+                  className="w-full bg-[#242424] border border-white/10 text-white p-3.5 rounded-xl text-sm focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center">
-                  <Phone size={14} className="mr-1.5 text-primary" /> Contact Number
+                <label className="block text-gray-400 text-xs font-bold uppercase tracking-wider mb-2 flex items-center">
+                  <span className="mr-1.5">📞</span> Contact Number
                 </label>
                 <input 
                   type="tel"
@@ -210,7 +199,7 @@ const Cart = () => {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="Enter 10 digit number"
-                  className="w-full bg-spyde-lightgray border border-white/5 text-white px-3.5 py-3 rounded-xl text-sm focus:border-primary/50 focus:outline-none transition-colors"
+                  className="w-full bg-[#242424] border border-white/10 text-white px-3.5 py-3 rounded-xl text-sm focus:outline-none"
                 />
               </div>
             </form>
@@ -219,8 +208,8 @@ const Cart = () => {
 
         {/* Right Column: Price summary */}
         <div className="space-y-4">
-          <div className="bg-spyde-gray border border-white/5 rounded-3xl p-6 shadow-xl space-y-4">
-            <h2 className="text-base font-bold text-white uppercase tracking-wider border-b border-white/5 pb-3">
+          <div className="bg-[#181818] border border-white/10 rounded-3xl p-6 space-y-4">
+            <h2 className="text-base font-bold text-white uppercase tracking-wider border-b border-white/10 pb-3">
               Bill Details
             </h2>
 
@@ -238,15 +227,15 @@ const Cart = () => {
                 <span className="text-gray-200 font-semibold">₹{platformFee}</span>
               </div>
               
-              <div className="flex justify-between border-t border-white/5 pt-4 text-white font-extrabold text-base">
+              <div className="flex justify-between border-t border-white/10 pt-4 text-white font-extrabold text-base">
                 <span>Grand Total</span>
                 <span className="text-primary">₹{grandTotal}</span>
               </div>
             </div>
 
             {/* Simulated Payment badge */}
-            <div className="bg-[#1a1a1a] p-3.5 rounded-2xl border border-white/5 flex items-center space-x-3 text-xs text-gray-400">
-              <CreditCard size={18} className="text-primary shrink-0" />
+            <div className="bg-[#242424] p-3.5 rounded-2xl border border-white/10 flex items-center space-x-3 text-xs text-gray-400">
+              <span className="text-lg">💳</span>
               <span>Simulated Instant Payment (Cashless/UPI) activated</span>
             </div>
 
@@ -254,14 +243,14 @@ const Cart = () => {
             <button 
               onClick={handleCheckout}
               disabled={loading || cart.length === 0}
-              className="w-full bg-primary hover:bg-primary-dark disabled:opacity-50 text-white font-extrabold py-3.5 rounded-xl shadow-lg shadow-primary/25 hover:scale-[1.01] active:scale-95 transition-all duration-200 flex items-center justify-center space-x-2 text-sm uppercase tracking-wider"
+              className="w-full bg-primary hover:bg-primary-dark disabled:opacity-50 text-white font-bold py-3.5 rounded-xl flex items-center justify-center space-x-2 text-sm uppercase tracking-wider"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
               ) : (
                 <>
                   <span>Place Order & Pay</span>
-                  <ArrowRight size={16} />
+                  <span>➔</span>
                 </>
               )}
             </button>

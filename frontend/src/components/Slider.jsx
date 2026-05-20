@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const slides = [
   {
@@ -47,10 +46,10 @@ const Slider = () => {
   };
 
   return (
-    <div className="relative w-full h-48 sm:h-64 rounded-2xl overflow-hidden shadow-2xl group">
+    <div className="relative w-full h-48 sm:h-64 rounded-2xl overflow-hidden group">
       {/* Slides Container */}
       <div 
-        className="flex w-full h-full transition-transform duration-700 ease-in-out"
+        className="flex w-full h-full transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {slides.map((slide) => (
@@ -63,7 +62,7 @@ const Slider = () => {
               <img 
                 src={slide.image} 
                 alt={slide.title} 
-                className="w-full h-full object-cover transform scale-105"
+                className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
             </div>
@@ -79,7 +78,7 @@ const Slider = () => {
               <p className="text-gray-300 text-sm sm:text-lg">
                 {slide.subtitle}
               </p>
-              <div className="inline-block bg-spyde-gray border border-primary/40 text-primary font-mono font-bold text-xs sm:text-sm px-4 py-2 rounded-lg">
+              <div className="inline-block bg-[#181818] border border-primary/40 text-primary font-mono font-bold text-xs sm:text-sm px-4 py-2 rounded-lg">
                 {slide.code}
               </div>
             </div>
@@ -90,15 +89,15 @@ const Slider = () => {
       {/* Navigation Arrows */}
       <button 
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-primary/95 text-white p-2 rounded-full transition-colors duration-200 opacity-0 group-hover:opacity-100 z-20"
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-primary text-white w-9 h-9 rounded-full flex items-center justify-center font-bold z-20"
       >
-        <ChevronLeft size={20} />
+        &lt;
       </button>
       <button 
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-primary/95 text-white p-2 rounded-full transition-colors duration-200 opacity-0 group-hover:opacity-100 z-20"
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-primary text-white w-9 h-9 rounded-full flex items-center justify-center font-bold z-20"
       >
-        <ChevronRight size={20} />
+        &gt;
       </button>
 
       {/* Dot Indicators */}

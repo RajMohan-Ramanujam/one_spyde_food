@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import API from '../api/axios';
 import Loader from '../components/Loader';
-import { LayoutDashboard, Plus, Trash2, Edit2, ShoppingBag, ListCollapse, CheckCircle, PackageOpen } from 'lucide-react';
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('orders'); // orders | menu
@@ -10,7 +9,6 @@ const AdminDashboard = () => {
   const [loadingOrders, setLoadingOrders] = useState(true);
   const [loadingFoods, setLoadingFoods] = useState(true);
 
-  // Form state for adding/editing foods
   const [showForm, setShowForm] = useState(false);
   const [editingFoodId, setEditingFoodId] = useState(null);
   const [foodForm, setFoodForm] = useState({
@@ -31,7 +29,6 @@ const AdminDashboard = () => {
     setTimeout(() => setMessage({ type: '', text: '' }), 4000);
   };
 
-  // Fetch orders (all customers)
   const fetchAllOrders = async () => {
     try {
       setLoadingOrders(true);
@@ -44,7 +41,6 @@ const AdminDashboard = () => {
     }
   };
 
-  // Fetch foods (all menu items)
   const fetchAllFoods = async () => {
     try {
       setLoadingFoods(true);
@@ -62,7 +58,6 @@ const AdminDashboard = () => {
     fetchAllFoods();
   }, []);
 
-  // Update order status (Admin)
   const handleUpdateStatus = async (orderId, newStatus) => {
     try {
       await API.put(`/orders/admin/status/${orderId}`, { orderStatus: newStatus });
@@ -74,21 +69,17 @@ const AdminDashboard = () => {
     }
   };
 
-  // Food Form submit (Create or Update)
   const handleFoodSubmit = async (e) => {
     e.preventDefault();
     try {
       if (editingFoodId) {
-        // Edit mode
         await API.put(`/foods/${editingFoodId}`, foodForm);
         triggerMessage('success', 'Food item updated successfully!');
       } else {
-        // Create mode
         await API.post('/foods', foodForm);
         triggerMessage('success', 'New food item added to menu!');
       }
       
-      // Reset form and reload
       setShowForm(false);
       setEditingFoodId(null);
       setFoodForm({
@@ -108,7 +99,6 @@ const AdminDashboard = () => {
     }
   };
 
-  // Populate form for editing
   const handleEditClick = (food) => {
     setEditingFoodId(food.id);
     setFoodForm({
@@ -124,7 +114,6 @@ const AdminDashboard = () => {
     setShowForm(true);
   };
 
-  // Delete food item
   const handleDeleteFood = async (foodId) => {
     if (!window.confirm('Are you sure you want to delete this item?')) return;
     try {
@@ -138,20 +127,20 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 pb-12 animate-fade-in">
+    <div className="max-w-6xl mx-auto space-y-6 pb-12">
       
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="flex items-center space-x-2.5">
-          <LayoutDashboard size={24} className="text-primary" />
-          <h1 className="text-2xl font-black text-white tracking-wide">Admin Control Panel</h1>
+          <span className="text-2xl text-primary">⚙️</span>
+          <h1 className="text-2xl font-bold text-white tracking-wide">Admin Control Panel</h1>
         </div>
 
         {/* Tab triggers */}
-        <div className="flex bg-spyde-gray border border-white/5 p-1 rounded-xl">
+        <div className="flex bg-[#181818] border border-white/10 p-1 rounded-xl">
           <button
             onClick={() => setActiveTab('orders')}
-            className={`px-4 py-2 text-xs font-bold uppercase rounded-lg transition-all ${
+            className={`px-4 py-2 text-xs font-bold uppercase rounded-lg transition-colors ${
               activeTab === 'orders' ? 'bg-primary text-white' : 'text-gray-400 hover:text-white'
             }`}
           >
@@ -159,7 +148,7 @@ const AdminDashboard = () => {
           </button>
           <button
             onClick={() => setActiveTab('menu')}
-            className={`px-4 py-2 text-xs font-bold uppercase rounded-lg transition-all ${
+            className={`px-4 py-2 text-xs font-bold uppercase rounded-lg transition-colors ${
               activeTab === 'menu' ? 'bg-primary text-white' : 'text-gray-400 hover:text-white'
             }`}
           >
@@ -170,13 +159,12 @@ const AdminDashboard = () => {
 
       {/* Messages */}
       {message.text && (
-        <div className={`px-4 py-3 rounded-xl text-xs font-bold flex items-center space-x-2 ${
+        <div className={`px-4 py-3 rounded-xl text-xs font-bold ${
           message.type === 'success' 
             ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400' 
             : 'bg-rose-500/10 border border-rose-500/20 text-rose-500'
         }`}>
-          <CheckCircle size={16} />
-          <span>{message.text}</span>
+          <span>{message.type === 'success' ? '✓' : '⚠️'} {message.text}</span>
         </div>
       )}
 
@@ -189,21 +177,21 @@ const AdminDashboard = () => {
           ) : orders.length > 0 ? (
             <div className="space-y-4">
               {orders.map((order) => (
-                <div key={order.id} className="bg-spyde-gray border border-white/5 rounded-3xl p-6 shadow-xl space-y-4">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/5 pb-3.5 gap-2">
+                <div key={order.id} className="bg-[#181818] border border-white/10 rounded-3xl p-6 space-y-4">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/10 pb-3.5 gap-2">
                     <div>
-                      <h4 className="font-extrabold text-white text-base">Order #{order.id}</h4>
+                      <h4 className="font-bold text-white text-base">Order #{order.id}</h4>
                       <p className="text-xs text-gray-400">
                         Customer: <b className="text-white">{order.customer_name}</b> ({order.customer_email})
                       </p>
                     </div>
 
-                    <div className="flex items-center space-x-3.5">
-                      <span className="text-xs text-gray-500">Update Status:</span>
+                    <div className="flex items-center space-x-3">
+                      <span className="text-xs text-gray-500 font-semibold">Status:</span>
                       <select
                         value={order.order_status}
                         onChange={(e) => handleUpdateStatus(order.id, e.target.value)}
-                        className="bg-spyde-lightgray border border-white/10 text-white rounded-xl text-xs font-bold px-3 py-2 focus:outline-none focus:border-primary/50"
+                        className="bg-[#242424] border border-white/10 text-white rounded-xl text-xs font-bold px-3 py-2 focus:outline-none"
                       >
                         <option value="Pending">Pending</option>
                         <option value="Preparing">Preparing</option>
@@ -224,21 +212,21 @@ const AdminDashboard = () => {
                   </div>
 
                   {/* Delivery Location */}
-                  <div className="bg-[#181818] p-3.5 rounded-2xl border border-white/5 text-xs text-gray-400">
+                  <div className="bg-[#242424] p-3.5 rounded-2xl border border-white/10 text-xs text-gray-400">
                     <p className="font-bold text-gray-500 uppercase tracking-wider mb-0.5">Shipping Address</p>
                     <p className="text-gray-300">{order.delivery_address}</p>
                     <p className="text-gray-300 mt-1">Phone: {order.phone}</p>
                   </div>
 
                   <div className="flex justify-between items-center text-xs pt-1">
-                    <span className="text-gray-500">Payment: <b className="text-emerald-500">{order.payment_status}</b></span>
-                    <span className="text-white text-sm font-black">Total Paid: ₹{order.total_amount}</span>
+                    <span className="text-gray-500">Payment: <b className="text-emerald-500 font-bold">{order.payment_status}</b></span>
+                    <span className="text-white text-sm font-bold">Total Paid: ₹{order.total_amount}</span>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="bg-spyde-gray border border-white/5 p-12 rounded-3xl text-center text-gray-500">
+            <div className="bg-[#181818] border border-white/10 p-12 rounded-3xl text-center text-gray-500">
               No orders found in the database.
             </div>
           )}
@@ -265,17 +253,16 @@ const AdminDashboard = () => {
                 });
                 setShowForm(!showForm);
               }}
-              className="flex items-center space-x-2 bg-primary hover:bg-primary-dark text-white text-xs font-bold uppercase px-4 py-2.5 rounded-xl transition-all"
+              className="bg-primary hover:bg-primary-dark text-white text-xs font-bold uppercase px-4 py-2.5 rounded-xl"
             >
-              <Plus size={16} />
-              <span>{showForm ? 'Close Editor' : 'Add Food'}</span>
+              <span>{showForm ? '✕ Close Editor' : '+ Add Food'}</span>
             </button>
           </div>
 
           {/* ADD / EDIT FOOD FORM */}
           {showForm && (
-            <div className="bg-spyde-gray border border-white/5 p-6 rounded-3xl shadow-xl animate-fade-in">
-              <h3 className="font-extrabold text-white text-base border-b border-white/5 pb-2 mb-4">
+            <div className="bg-[#181818] border border-white/10 p-6 rounded-3xl">
+              <h3 className="font-bold text-white text-base border-b border-white/10 pb-2 mb-4">
                 {editingFoodId ? 'Modify Food Details' : 'Create New Dish'}
               </h3>
 
@@ -288,7 +275,7 @@ const AdminDashboard = () => {
                     value={foodForm.name}
                     onChange={(e) => setFoodForm({ ...foodForm, name: e.target.value })}
                     placeholder="e.g. Garlic Bread"
-                    className="w-full bg-spyde-lightgray border border-white/5 text-white p-3 rounded-xl text-xs focus:outline-none focus:border-primary/50"
+                    className="w-full bg-[#242424] border border-white/10 text-white p-3 rounded-xl text-xs focus:outline-none"
                   />
                 </div>
 
@@ -300,7 +287,7 @@ const AdminDashboard = () => {
                     value={foodForm.price}
                     onChange={(e) => setFoodForm({ ...foodForm, price: e.target.value })}
                     placeholder="e.g. 199"
-                    className="w-full bg-spyde-lightgray border border-white/5 text-white p-3 rounded-xl text-xs focus:outline-none focus:border-primary/50"
+                    className="w-full bg-[#242424] border border-white/10 text-white p-3 rounded-xl text-xs focus:outline-none"
                   />
                 </div>
 
@@ -309,7 +296,7 @@ const AdminDashboard = () => {
                   <select
                     value={foodForm.category}
                     onChange={(e) => setFoodForm({ ...foodForm, category: e.target.value })}
-                    className="w-full bg-spyde-lightgray border border-white/5 text-white p-3 rounded-xl text-xs focus:outline-none focus:border-primary/50"
+                    className="w-full bg-[#242424] border border-white/10 text-white p-3 rounded-xl text-xs focus:outline-none"
                   >
                     <option value="Pizza">Pizza</option>
                     <option value="Burger">Burger</option>
@@ -328,7 +315,7 @@ const AdminDashboard = () => {
                     value={foodForm.discount_percent}
                     onChange={(e) => setFoodForm({ ...foodForm, discount_percent: e.target.value })}
                     placeholder="e.g. 10"
-                    className="w-full bg-spyde-lightgray border border-white/5 text-white p-3 rounded-xl text-xs focus:outline-none focus:border-primary/50"
+                    className="w-full bg-[#242424] border border-white/10 text-white p-3 rounded-xl text-xs focus:outline-none"
                   />
                 </div>
 
@@ -339,7 +326,7 @@ const AdminDashboard = () => {
                     value={foodForm.image_url}
                     onChange={(e) => setFoodForm({ ...foodForm, image_url: e.target.value })}
                     placeholder="https://images.unsplash.com/..."
-                    className="w-full bg-spyde-lightgray border border-white/5 text-white p-3 rounded-xl text-xs focus:outline-none focus:border-primary/50"
+                    className="w-full bg-[#242424] border border-white/10 text-white p-3 rounded-xl text-xs focus:outline-none"
                   />
                 </div>
 
@@ -350,7 +337,7 @@ const AdminDashboard = () => {
                     value={foodForm.description}
                     onChange={(e) => setFoodForm({ ...foodForm, description: e.target.value })}
                     placeholder="Describe ingredients, taste profile, quantity..."
-                    className="w-full bg-spyde-lightgray border border-white/5 text-white p-3 rounded-xl text-xs focus:outline-none focus:border-primary/50"
+                    className="w-full bg-[#242424] border border-white/10 text-white p-3 rounded-xl text-xs focus:outline-none"
                   />
                 </div>
 
@@ -361,7 +348,7 @@ const AdminDashboard = () => {
                       type="checkbox"
                       checked={foodForm.is_veg}
                       onChange={(e) => setFoodForm({ ...foodForm, is_veg: e.target.checked })}
-                      className="rounded bg-spyde-lightgray border-white/10 text-primary focus:ring-primary focus:ring-0"
+                      className="rounded bg-[#242424] border-white/10 text-primary focus:ring-0"
                     />
                     <span>Is Vegetarian</span>
                   </label>
@@ -371,7 +358,7 @@ const AdminDashboard = () => {
                       type="checkbox"
                       checked={foodForm.is_available}
                       onChange={(e) => setFoodForm({ ...foodForm, is_available: e.target.checked })}
-                      className="rounded bg-spyde-lightgray border-white/10 text-primary focus:ring-primary focus:ring-0"
+                      className="rounded bg-[#242424] border-white/10 text-primary focus:ring-0"
                     />
                     <span>In Stock / Available</span>
                   </label>
@@ -380,7 +367,7 @@ const AdminDashboard = () => {
                 <div className="md:col-span-2 pt-2">
                   <button
                     type="submit"
-                    className="bg-primary hover:bg-primary-dark text-white text-xs font-bold uppercase px-6 py-3 rounded-xl transition-all"
+                    className="bg-primary hover:bg-primary-dark text-white text-xs font-bold uppercase px-6 py-3 rounded-xl"
                   >
                     {editingFoodId ? 'Save Changes' : 'Create Item'}
                   </button>
@@ -393,11 +380,11 @@ const AdminDashboard = () => {
           {loadingFoods ? (
             <Loader />
           ) : (
-            <div className="bg-spyde-gray border border-white/5 rounded-3xl overflow-hidden shadow-xl">
+            <div className="bg-[#181818] border border-white/10 rounded-3xl overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="border-b border-white/5 bg-[#171717] text-xs font-bold text-gray-400 uppercase tracking-wider">
+                    <tr className="border-b border-white/10 bg-[#121212] text-xs font-bold text-gray-400 uppercase tracking-wider">
                       <th className="p-4">Dish</th>
                       <th className="p-4">Category</th>
                       <th className="p-4">Price</th>
@@ -406,23 +393,23 @@ const AdminDashboard = () => {
                       <th className="p-4 text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5 text-xs">
+                  <tbody className="divide-y divide-white/10 text-xs">
                     {foods.map((food) => (
                       <tr key={food.id} className="hover:bg-white/5 transition-colors">
                         <td className="p-4 flex items-center space-x-3">
                           <img
                             src={food.image_url}
                             alt={food.name}
-                            className="w-10 h-10 object-cover rounded-lg bg-spyde-lightgray"
+                            className="w-10 h-10 object-cover rounded-lg bg-[#242424]"
                           />
                           <div>
-                            <span className="font-extrabold text-white block">{food.name}</span>
-                            <span className={`text-[10px] ${food.is_veg === 1 ? 'text-emerald-500' : 'text-rose-500'}`}>
+                            <span className="font-bold text-white block">{food.name}</span>
+                            <span className={`text-[10px] font-semibold ${food.is_veg === 1 ? 'text-emerald-500' : 'text-rose-500'}`}>
                               {food.is_veg === 1 ? 'Veg' : 'Non-veg'}
                             </span>
                           </div>
                         </td>
-                        <td className="p-4 text-gray-300 font-medium">{food.category}</td>
+                        <td className="p-4 text-gray-300 font-semibold">{food.category}</td>
                         <td className="p-4 text-white font-extrabold">₹{food.price}</td>
                         <td className="p-4 text-primary font-bold">{food.discount_percent}%</td>
                         <td className="p-4">
@@ -438,15 +425,15 @@ const AdminDashboard = () => {
                           <div className="flex justify-end space-x-2">
                             <button
                               onClick={() => handleEditClick(food)}
-                              className="text-gray-400 hover:text-primary p-1.5 hover:bg-spyde-lightgray rounded-lg transition-all"
+                              className="text-gray-400 hover:text-primary p-1.5 hover:bg-[#242424] rounded-lg text-sm"
                             >
-                              <Edit2 size={14} />
+                              ✏️
                             </button>
                             <button
                               onClick={() => handleDeleteFood(food.id)}
-                              className="text-gray-400 hover:text-rose-500 p-1.5 hover:bg-spyde-lightgray rounded-lg transition-all"
+                              className="text-gray-400 hover:text-rose-500 p-1.5 hover:bg-[#242424] rounded-lg text-sm"
                             >
-                              <Trash2 size={14} />
+                              🗑️
                             </button>
                           </div>
                         </td>
