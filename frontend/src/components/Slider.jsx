@@ -30,12 +30,20 @@ const Slider = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
-    }, 4000);
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 
+  const handlePrev = () => {
+    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const handleNext = () => {
+    setCurrent((prev) => (prev + 1) % slides.length);
+  };
+
   return (
-    <div className="relative w-full rounded-xl overflow-hidden shadow-sm h-60 md:h-48 bg-gray-100">
+    <div className="relative w-full rounded-xl overflow-hidden shadow-sm h-60 md:h-48 bg-gray-100 group">
       
       {/* Slides Container */}
       <div 
@@ -45,7 +53,7 @@ const Slider = () => {
         {slides.map((slide, idx) => (
           <div 
             key={idx} 
-            className={`w-full h-full shrink-0 ${slide.bgClass} p-5 md:p-6 flex flex-col md:flex-row items-center justify-between text-white gap-4`}
+            className={`w-full h-full shrink-0 ${slide.bgClass} p-5 md:p-6 flex flex-col md:flex-row items-center justify-between text-white gap-4 px-10`}
           >
             <div className="space-y-1.5 text-center md:text-left flex-1 min-w-0">
               <span className="inline-block bg-black/20 text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
@@ -71,6 +79,22 @@ const Slider = () => {
           </div>
         ))}
       </div>
+
+      {/* Navigation Arrows */}
+      <button 
+        onClick={handlePrev}
+        className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/15 hover:bg-black/35 text-white flex items-center justify-center text-xs transition-colors focus:outline-none"
+        aria-label="Previous Slide"
+      >
+        ◀
+      </button>
+      <button 
+        onClick={handleNext}
+        className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/15 hover:bg-black/35 text-white flex items-center justify-center text-xs transition-colors focus:outline-none"
+        aria-label="Next Slide"
+      >
+        ▶
+      </button>
 
       {/* Slide Dot Indicators */}
       <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-1">
