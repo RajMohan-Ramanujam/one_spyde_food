@@ -9,9 +9,27 @@ const Footer = () => {
         {/* Company Info */}
         <div className="space-y-3">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold text-lg">
-              S
-            </div>
+            {/* Basketball Style Logo */}
+            <svg viewBox="0 0 100 100" className="w-8 h-8 shrink-0 select-none">
+              <circle cx="50" cy="50" r="46" fill="#F97316" stroke="#000000" strokeWidth="5" />
+              <path d="M 50 4 A 46 46 0 0 0 50 96" fill="none" stroke="#000000" strokeWidth="4" />
+              <path d="M 4 50 A 46 46 0 0 0 96 50" fill="none" stroke="#000000" strokeWidth="4" />
+              <path d="M 17 17 C 35 30 35 70 17 83" fill="none" stroke="#000000" strokeWidth="4" />
+              <path d="M 83 17 C 65 30 65 70 83 83" fill="none" stroke="#000000" strokeWidth="4" />
+              <text 
+                x="50" 
+                y="59" 
+                textAnchor="middle" 
+                fill="#FFFFFF" 
+                stroke="#000000" 
+                strokeWidth="2.5" 
+                fontSize="28" 
+                fontWeight="900" 
+                paintOrder="stroke fill"
+              >
+                S
+              </text>
+            </svg>
             <span className="font-bold text-base text-gray-800">
               One <span className="text-orange-500">Spyde</span>
             </span>
@@ -88,7 +106,7 @@ const Footer = () => {
           <div className="space-y-2 text-xs text-gray-500">
             <div className="flex items-start space-x-2">
               <span className="text-orange-500 shrink-0">📍</span>
-              <span>123 Spyde Lane, Bangalore, India</span>
+              <span>pondicherry. 601407 </span>
             </div>
             <div className="flex items-center space-x-2">
               <span className="text-orange-500 shrink-0">📞</span>
