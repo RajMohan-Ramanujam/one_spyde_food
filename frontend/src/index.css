@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#0b0b0b] text-gray-100 font-sans antialiased;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Webkit scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #121212;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff6600;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #cc5200;
+}
+
+/* Custom glassmorphism classes */
+.glass-panel {
+  background: rgba(30, 30, 30, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 102, 0, 0.1);
+}
+
+.glow-orange:hover {
+  box-shadow: 0 0 15px rgba(255, 102, 0, 0.4);
+}
