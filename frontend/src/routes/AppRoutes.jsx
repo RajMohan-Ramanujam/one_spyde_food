@@ -14,13 +14,11 @@ import FoodDetails from '../pages/FoodDetails';
 import AdminDashboard from '../pages/AdminDashboard';
 
 import Navbar from '../components/Navbar';
-import Sidebar from '../components/Sidebar';
-import ProfileSidebar from '../components/ProfileSidebar';
 import Footer from '../components/Footer';
 
 // Layout wrapper for authenticated pages
 const MainLayout = ({ children }) => {
-  const { sidebarOpen, setSidebarOpen, profileOpen, setProfileOpen, user } = useContext(AppContext);
+  const { user } = useContext(AppContext);
 
   if (!user) {
     return <Navigate to="/login" replace />;
@@ -29,26 +27,16 @@ const MainLayout = ({ children }) => {
   return (
     <div className="min-h-screen bg-[#0b0b0b] flex flex-col">
       {/* Header Navbar */}
-      <Navbar 
-        toggleSidebar={() => setSidebarOpen(!sidebarOpen)} 
-        toggleProfile={() => setProfileOpen(!profileOpen)} 
-      />
+      <Navbar />
 
       {/* Main App Container */}
       <div className="flex flex-1 pt-16">
         
-        {/* Left Navigation Sidebar */}
-        <Sidebar isOpen={sidebarOpen} toggleSidebar={() => setSidebarOpen(false)} />
-
-        {/* Profile Slide-out Drawer */}
-        <ProfileSidebar isOpen={profileOpen} toggleProfile={() => setProfileOpen(false)} />
-
-        {/* Content Area (Shifted right for large screens to accommodate sidebar) */}
-        <main className="flex-1 lg:pl-64 flex flex-col min-w-0">
+        {/* Content Area */}
+        <main className="flex-1 flex flex-col min-w-0">
           <div className="flex-1 p-4 md:p-8 max-w-7xl w-full mx-auto">
             {children}
           </div>
-          {/* Footer inside Content View */}
           <Footer />
         </main>
 

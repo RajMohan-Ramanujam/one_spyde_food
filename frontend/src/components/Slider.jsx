@@ -46,16 +46,16 @@ const Slider = () => {
   };
 
   return (
-    <div className="relative w-full h-48 sm:h-64 rounded-2xl overflow-hidden group">
+    <div className="relative w-full h-44 rounded-2xl overflow-hidden">
       {/* Slides Container */}
       <div 
-        className="flex w-full h-full transition-transform duration-500 ease-in-out"
-        style={{ transform: `translateX(-${current * 100}%)` }}
+        className="flex w-full h-full"
+        style={{ transform: `translateX(-${current * 100}%)`, transition: 'transform 0.5s ease-in-out' }}
       >
         {slides.map((slide) => (
           <div 
             key={slide.id}
-            className={`min-w-full h-full flex flex-row items-center justify-between px-8 sm:px-16 bg-gradient-to-r ${slide.bgColor} relative overflow-hidden`}
+            className={`min-w-full h-full flex items-center justify-between px-6 sm:px-12 bg-gradient-to-r ${slide.bgColor} relative overflow-hidden`}
           >
             {/* Background elements */}
             <div className="absolute right-0 top-0 bottom-0 w-1/2 h-full opacity-60">
@@ -68,17 +68,17 @@ const Slider = () => {
             </div>
 
             {/* Slide Content */}
-            <div className="z-10 max-w-lg space-y-2 sm:space-y-4">
-              <span className="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                Limited Offer
+            <div className="z-10 space-y-2">
+              <span className="bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded">
+                PROMO
               </span>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+              <h2 className="text-xl sm:text-2xl font-bold text-white leading-tight">
                 {slide.title}
               </h2>
-              <p className="text-gray-300 text-sm sm:text-lg">
+              <p className="text-gray-300 text-xs sm:text-sm">
                 {slide.subtitle}
               </p>
-              <div className="inline-block bg-[#181818] border border-primary/40 text-primary font-mono font-bold text-xs sm:text-sm px-4 py-2 rounded-lg">
+              <div className="inline-block bg-[#181818] border border-primary/40 text-primary font-mono text-xs px-3 py-1 rounded">
                 {slide.code}
               </div>
             </div>
@@ -89,25 +89,25 @@ const Slider = () => {
       {/* Navigation Arrows */}
       <button 
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-primary text-white w-9 h-9 rounded-full flex items-center justify-center font-bold z-20"
+        className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold z-20 text-xs"
       >
         &lt;
       </button>
       <button 
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-primary text-white w-9 h-9 rounded-full flex items-center justify-center font-bold z-20"
+        className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold z-20 text-xs"
       >
         &gt;
       </button>
 
-      {/* Dot Indicators */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
+      {/* Circle Indicators (Uniform small dots) */}
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrent(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              current === index ? 'bg-primary w-6' : 'bg-white/40'
+            className={`w-2.5 h-2.5 rounded-full transition-colors ${
+              current === index ? 'bg-primary' : 'bg-white/40'
             }`}
           ></button>
         ))}

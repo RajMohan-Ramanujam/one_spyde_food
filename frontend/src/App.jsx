@@ -3,7 +3,6 @@ import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from './routes/AppRoutes';
 import API from './api/axios';
 
-// Create global Context for simple state management
 export const AppContext = createContext();
 
 function App() {
@@ -11,10 +10,6 @@ function App() {
   const [token, setToken] = useState(null);
   const [cart, setCart] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  
-  // Layout toggles
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
 
   // Initialize Auth from local storage
   useEffect(() => {
@@ -104,10 +99,6 @@ function App() {
         cart,
         searchQuery,
         setSearchQuery,
-        sidebarOpen,
-        setSidebarOpen,
-        profileOpen,
-        setProfileOpen,
         login,
         logout,
         fetchCart,
