@@ -103,17 +103,6 @@ const Navbar = () => {
           Orders
         </Link>
 
-        {user && user.role === 'admin' && (
-          <Link 
-            to="/admin" 
-            className={`text-xs font-semibold transition-colors ${
-              isActive('/admin') ? 'text-orange-500 font-bold' : 'text-gray-500 hover:text-orange-500'
-            }`}
-          >
-            Admin
-          </Link>
-        )}
-
         <Link 
           to="/profile" 
           className={`text-xs font-semibold transition-colors ${

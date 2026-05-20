@@ -11,7 +11,6 @@ import Cart from '../pages/Cart';
 import Orders from '../pages/Orders';
 import Profile from '../pages/Profile';
 import FoodDetails from '../pages/FoodDetails';
-import AdminDashboard from '../pages/AdminDashboard';
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -62,16 +61,6 @@ const AppRoutes = () => {
       <Route path="/cart" element={<MainLayout><Cart /></MainLayout>} />
       <Route path="/orders" element={<MainLayout><Orders /></MainLayout>} />
       <Route path="/profile" element={<MainLayout><Profile /></MainLayout>} />
-      
-      {/* Protected Admin Only Route */}
-      <Route 
-        path="/admin" 
-        element={
-          user && user.role === 'admin' 
-            ? <MainLayout><AdminDashboard /></MainLayout> 
-            : <Navigate to="/" replace />
-        } 
-      />
 
       {/* Fallback route */}
       <Route path="*" element={<Navigate to="/" replace />} />
