@@ -22,9 +22,9 @@ const Navbar = () => {
     <header className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 z-30 px-4 md:px-8 flex items-center justify-between shadow-sm">
       
       {/* Brand logo (Basketball Pizza - Game + Food Theme) */}
-      <div className="flex items-center space-x-2">
-        <Link to="/" onClick={() => setSearchQuery('')} className="flex items-center space-x-2">
-          <svg viewBox="0 0 100 100" className="w-6.5 h-6.5 shrink-0 select-none">
+      <div className="flex items-center space-x-1.5">
+        <Link to="/" onClick={() => setSearchQuery('')} className="flex items-center space-x-1.5">
+          <svg viewBox="0 0 100 100" className="w-5 h-5 shrink-0 select-none">
             {/* Pizza Crust Box */}
             <rect x="4" y="4" width="92" height="92" rx="18" fill="#D97706" stroke="#000000" strokeWidth="5" />
             {/* Cheese Layer Box */}
@@ -57,7 +57,7 @@ const Navbar = () => {
               S
             </text>
           </svg>
-          <span className="font-bold text-base text-gray-800 tracking-tight">
+          <span className="font-bold text-sm text-gray-800 tracking-tight">
             One <span className="text-orange-500">Spyde</span>
           </span>
         </Link>

@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="space-y-3">
           <div className="flex items-center space-x-2">
             {/* Basketball Pizza Logo - Game + Food Theme */}
-            <svg viewBox="0 0 100 100" className="w-6 h-6 shrink-0 select-none">
+            <svg viewBox="0 0 100 100" className="w-5 h-5 shrink-0 select-none">
               {/* Pizza Crust Box */}
               <rect x="4" y="4" width="92" height="92" rx="18" fill="#D97706" stroke="#000000" strokeWidth="5" />
               {/* Cheese Layer Box */}
@@ -43,7 +43,7 @@ const Footer = () => {
                 S
               </text>
             </svg>
-            <span className="font-bold text-base text-gray-800">
+            <span className="font-bold text-sm text-gray-800">
               One <span className="text-orange-500">Spyde</span>
             </span>
           </div>
