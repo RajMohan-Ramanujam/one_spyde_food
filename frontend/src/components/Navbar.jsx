@@ -23,8 +23,8 @@ const Navbar = () => {
       
       {/* Brand logo (Basketball Pizza - Game + Food Theme) */}
       <div className="flex items-center space-x-2">
-        <Link to="/" onClick={() => setSearchQuery('')} className="flex items-center space-x-2.5">
-          <svg viewBox="0 0 100 100" className="w-8.5 h-8.5 shrink-0 select-none">
+        <Link to="/" onClick={() => setSearchQuery('')} className="flex items-center space-x-2">
+          <svg viewBox="0 0 100 100" className="w-7.5 h-7.5 shrink-0 select-none">
             {/* Pizza Crust */}
             <circle cx="50" cy="50" r="46" fill="#D97706" stroke="#000000" strokeWidth="4.5" />
             {/* Cheese Layer */}

@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="space-y-3">
           <div className="flex items-center space-x-2">
             {/* Basketball Pizza Logo - Game + Food Theme */}
-            <svg viewBox="0 0 100 100" className="w-8 h-8 shrink-0 select-none">
+            <svg viewBox="0 0 100 100" className="w-7 h-7 shrink-0 select-none">
               <circle cx="50" cy="50" r="46" fill="#D97706" stroke="#000000" strokeWidth="4.5" />
               <circle cx="50" cy="50" r="40" fill="#FBBF24" />
               <path d="M 50 10 A 40 40 0 0 0 50 90" fill="none" stroke="#78350F" strokeWidth="3" strokeLinecap="round" />
